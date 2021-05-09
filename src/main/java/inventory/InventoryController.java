@@ -9,7 +9,6 @@ import java.sql.*;
 
 @RestController
 public class InventoryController {
-	private static ArrayList<String> itemsIdList = new ArrayList<>();
 
   	private static String getUserInventory(int userid) 
 	{
@@ -35,26 +34,14 @@ public class InventoryController {
             // loop through the result set
             while (rs.next()) {
                 inventory  += rs.getString("Name") + ", ";
-				//itemsIdList.add(rs.getString("ItemId"));
-            }
+            }		
 
-            //******************* Attempt to Connect to Item-Service through Rest API *******************
-			// Not working: Connection Refused
-//            RestTemplate restTemplate = new RestTemplate();
-//
-//			String inventory ="";
-//			// for each item id, call Items-service and get details
-//			for(String id : itemsIdList){
-//				Item item = restTemplate.getForObject("http://localhost:9001/item?id=" + id, Item.class);
-//				inventory += item.getItem();
-//			}			
-
-			return inventory;
+	return inventory;
 
         }	
-		catch ( Exception e ) {
-			return e.toString();
-		}
+	catch ( Exception e ) {
+		return e.toString();
+	}
    }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
